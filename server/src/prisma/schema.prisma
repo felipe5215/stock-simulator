@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  Email    String
+  Password String
+  Holdings Holdings[]
+  Wallet   Wallet[]
+}
+
+model Stocks {
+
+  id        Int        @id @default(autoincrement())
+  CodAtivo  Int
+  NomeAtivo String
+  Valor     Float
+  Holdings  Holdings[]
+}
+
+model Wallet {
+  id         Int   @id @default(autoincrement())
+  Cliente    User  @relation(fields: [CodCliente], references: [id])
+  CodCliente Int
+  Saldo      Float
+}
+
+model Holdings {
+  id         String @id @default(cuid())
+  Cliente    User   @relation(fields: [CodCliente], references: [id])
+  Ativo      Stocks @relation(fields: [CodAtivo], references: [id])
+  Quantidade Float
+  CodCliente Int
+  CodAtivo   Int
+}
