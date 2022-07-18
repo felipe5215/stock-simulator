@@ -8,17 +8,16 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  Email    String
-  Password String
-  Holdings Holdings[]
-  Wallet   Wallet[]
+  CodCliente Int        @id @default(autoincrement())
+  email      String
+  password   String
+  Holdings   Holdings[]
+  Wallet     Wallet[]
 }
 
 model Stocks {
 
-  id        Int        @id @default(autoincrement())
-  CodAtivo  Int
+  CodAtivo  Int        @id @default(autoincrement())
   NomeAtivo String
   Valor     Float
   Holdings  Holdings[]
@@ -26,15 +25,15 @@ model Stocks {
 
 model Wallet {
   id         Int   @id @default(autoincrement())
-  Cliente    User  @relation(fields: [CodCliente], references: [id])
+  Cliente    User  @relation(fields: [CodCliente], references: [CodCliente])
   CodCliente Int
-  Saldo      Float
+  Saldo      Float @default(999.99)
 }
 
 model Holdings {
   id         String @id @default(cuid())
-  Cliente    User   @relation(fields: [CodCliente], references: [id])
-  Ativo      Stocks @relation(fields: [CodAtivo], references: [id])
+  Cliente    User   @relation(fields: [CodCliente], references: [CodCliente])
+  Ativo      Stocks @relation(fields: [CodAtivo], references: [CodAtivo])
   Quantidade Float
   CodCliente Int
   CodAtivo   Int
