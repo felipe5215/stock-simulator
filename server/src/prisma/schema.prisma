@@ -34,7 +34,7 @@ model Holdings {
   id         String @id @default(cuid())
   Cliente    User   @relation(fields: [CodCliente], references: [CodCliente])
   Ativo      Stocks @relation(fields: [CodAtivo], references: [CodAtivo])
-  Quantidade Float
+  QtdeAtivo  Float
   CodCliente Int
   CodAtivo   Int
 }

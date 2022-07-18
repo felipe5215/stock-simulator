@@ -28,7 +28,7 @@ CREATE TABLE `Wallet` (
 -- CreateTable
 CREATE TABLE `Holdings` (
     `id` VARCHAR(191) NOT NULL,
-    `Quantidade` DOUBLE NOT NULL,
+    `QtdeAtivo` DOUBLE NOT NULL,
     `CodCliente` INTEGER NOT NULL,
     `CodAtivo` INTEGER NOT NULL,
 
