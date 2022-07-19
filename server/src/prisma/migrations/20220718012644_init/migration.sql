@@ -12,6 +12,7 @@ CREATE TABLE `Stocks` (
     `CodAtivo` INTEGER NOT NULL AUTO_INCREMENT,
     `NomeAtivo` VARCHAR(191) NOT NULL,
     `Valor` DOUBLE NOT NULL,
+    `QtdeAtivo` INTEGER NOT NULL DEFAULT 999,
 
     PRIMARY KEY (`CodAtivo`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -28,7 +29,7 @@ CREATE TABLE `Wallet` (
 -- CreateTable
 CREATE TABLE `Holdings` (
     `id` VARCHAR(191) NOT NULL,
-    `QtdeAtivo` DOUBLE NOT NULL,
+    `QtdeAtivo` INTEGER NOT NULL,
     `CodCliente` INTEGER NOT NULL,
     `CodAtivo` INTEGER NOT NULL,
 

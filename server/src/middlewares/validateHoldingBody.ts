@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import Exception from '../utils/http.exception';
 
-const validateBuy = (req: Request, _res: Response, next: NextFunction) => {
+const validateHoldingBody = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
   const { codCliente, codAtivo, qtdeAtivo } = req.body;
 
   if (!codCliente || !codAtivo || !qtdeAtivo) {
@@ -22,4 +26,4 @@ const validateBuy = (req: Request, _res: Response, next: NextFunction) => {
   next();
 };
 
-export default validateBuy;
+export default validateHoldingBody;

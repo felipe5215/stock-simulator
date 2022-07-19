@@ -20,6 +20,7 @@ model Stocks {
   CodAtivo  Int        @id @default(autoincrement())
   NomeAtivo String
   Valor     Float
+  QtdeAtivo Int        @default(999)
   Holdings  Holdings[]
 }
 
@@ -34,7 +35,7 @@ model Holdings {
   id         String @id @default(cuid())
   Cliente    User   @relation(fields: [CodCliente], references: [CodCliente])
   Ativo      Stocks @relation(fields: [CodAtivo], references: [CodAtivo])
-  QtdeAtivo  Float
+  QtdeAtivo  Int
   CodCliente Int
   CodAtivo   Int
 }
