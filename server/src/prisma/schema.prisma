@@ -8,8 +8,8 @@ datasource db {
 }
 
 model User {
-  clientId String     @id @default(uuid())
-  email    String
+  clientId String     @id @unique @default(uuid())
+  email    String     @unique
   password String
   Holdings Holdings[]
   Wallet   Wallet[]
@@ -17,18 +17,18 @@ model User {
 
 model Stocks {
 
-  assetId   String     @id @default(uuid())
-  assetName String
+  assetId   String     @id @unique @default(uuid())
+  assetName String     @unique
   Valor     Float
   assetQtty Int        @default(999)
   Holdings  Holdings[]
 }
 
 model Wallet {
-  walletId String @id @default(uuid())
+  walletId String @id @unique @default(uuid())
   Client   User   @relation(fields: [clientId], references: [clientId])
-  clientId String
-  Saldo    Float  @default(999.99)
+  clientId String @unique
+  balance  Float  @default(999.99)
 }
 
 model Holdings {

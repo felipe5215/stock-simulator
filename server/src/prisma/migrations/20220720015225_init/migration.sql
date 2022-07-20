@@ -4,6 +4,8 @@ CREATE TABLE `User` (
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `User_clientId_key`(`clientId`),
+    UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`clientId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -14,6 +16,8 @@ CREATE TABLE `Stocks` (
     `Valor` DOUBLE NOT NULL,
     `assetQtty` INTEGER NOT NULL DEFAULT 999,
 
+    UNIQUE INDEX `Stocks_assetId_key`(`assetId`),
+    UNIQUE INDEX `Stocks_assetName_key`(`assetName`),
     PRIMARY KEY (`assetId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -23,6 +27,8 @@ CREATE TABLE `Wallet` (
     `clientId` VARCHAR(191) NOT NULL,
     `Saldo` DOUBLE NOT NULL DEFAULT 999.99,
 
+    UNIQUE INDEX `Wallet_walletId_key`(`walletId`),
+    UNIQUE INDEX `Wallet_clientId_key`(`clientId`),
     PRIMARY KEY (`walletId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

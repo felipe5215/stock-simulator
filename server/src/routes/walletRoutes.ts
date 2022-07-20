@@ -7,7 +7,7 @@ import {
 
 const walletRoutes = Router();
 
-walletRoutes.get('/withdraw', makeWithdraw);
+walletRoutes.post('/withdraw', makeWithdraw);
 walletRoutes.post('/deposit', makeDeposit);
 walletRoutes.get('/:id', getBalanceById);
 

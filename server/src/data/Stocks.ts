@@ -46,7 +46,7 @@ const Stocks: IStocks[] = [
     Valor: 421.14,
   },
   {
-    assetName: 'VVAR3',
+    assetName: 'XPTO',
     Valor: 391.22,
   },
 ];
