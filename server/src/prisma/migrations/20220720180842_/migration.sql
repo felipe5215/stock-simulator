@@ -13,7 +13,7 @@ CREATE TABLE `User` (
 CREATE TABLE `Stocks` (
     `assetId` VARCHAR(191) NOT NULL,
     `assetName` VARCHAR(191) NOT NULL,
-    `Valor` DOUBLE NOT NULL,
+    `value` DOUBLE NOT NULL,
     `assetQtty` INTEGER NOT NULL DEFAULT 999,
 
     UNIQUE INDEX `Stocks_assetId_key`(`assetId`),
@@ -25,7 +25,7 @@ CREATE TABLE `Stocks` (
 CREATE TABLE `Wallet` (
     `walletId` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
-    `Saldo` DOUBLE NOT NULL DEFAULT 999.99,
+    `balance` DOUBLE NOT NULL,
 
     UNIQUE INDEX `Wallet_walletId_key`(`walletId`),
     UNIQUE INDEX `Wallet_clientId_key`(`clientId`),

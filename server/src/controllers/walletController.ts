@@ -1,10 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import IBankOrder from '../interfaces/bankorder.interface';
-import { depositService, withdrawService } from '../services/bankService';
+import {
+  checkBalance,
+  depositService,
+  withdrawService,
+} from '../services/bankService';
 
 export const getBalanceById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  res.send(`O saldo da conta ${id} é R$ 100,00`);
+  console.log(id);
+  const userWallet = await checkBalance(id);
+  res.status(200).json(userWallet);
 };
 
 export const makeDeposit = async (req: Request, res: Response) => {

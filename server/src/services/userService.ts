@@ -3,13 +3,22 @@ import IUserBody from '../interfaces/user.interface';
 
 const prisma = new PrismaClient();
 
-const createUserService = async (user: IUserBody) => {
+export const createUserService = async (user: IUserBody) => {
   const createUser = await prisma.user.create({
     data: {
       email: user.email,
       password: user.password,
+      Wallet: {
+        create: {
+          balance: 999.99,
+        },
+      },
     },
   });
   return createUser;
 };
-export default createUserService;
+
+export const getAllUsersService = async () => {
+  const allUsers = await prisma.user.findMany();
+  return allUsers;
+};

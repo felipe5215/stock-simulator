@@ -1,7 +1,7 @@
 interface IStocks {
   assetId?: string;
   assetName: string;
-  Valor: number;
+  value: number;
   assetQtty?: number;
 }
 
