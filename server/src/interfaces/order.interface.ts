@@ -1,7 +1,7 @@
 interface IOrder {
-  codCliente: number;
-  codAtivo: number;
-  qtdeAtivo: number;
+  clientId: string;
+  assetId: string;
+  assetQtty: number;
 }
 
 export default IOrder;

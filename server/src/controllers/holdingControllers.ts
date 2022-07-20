@@ -11,7 +11,7 @@ export const buyStocks = async (
 
   try {
     await buyStocksService(order);
-    res.status(200).json({ message: `${order.qtdeAtivo} ativos comprados` });
+    res.status(200).json({ message: `${order.assetQtty} ativos comprados` });
   } catch (err) {
     next(err);
   }

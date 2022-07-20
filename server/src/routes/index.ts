@@ -5,10 +5,10 @@ import walletRoutes from './walletRoutes';
 
 const routes = Router();
 
-routes.use('/conta', walletRoutes);
+routes.use('/wallet', walletRoutes);
 
 routes.use('/user', userRoutes);
 
-routes.use('/investimentos', holdingRoutes);
+routes.use('/exchange', holdingRoutes);
 
 export default routes;

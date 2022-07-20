@@ -6,6 +6,6 @@ const holdingRoutes = Router();
 
 holdingRoutes.use(validateHoldingBody);
 
-holdingRoutes.post('/comprar', buyStocks);
+holdingRoutes.post('/buy', buyStocks);
 
 export default holdingRoutes;

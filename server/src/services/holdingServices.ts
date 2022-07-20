@@ -7,10 +7,10 @@ const prisma = new PrismaClient();
 export const checkExchangeStocks = async (order: IOrder) => {
   const exchangeStocks = await prisma.stocks.findUnique({
     where: {
-      CodAtivo: order.codAtivo,
+      assetId: order.assetId,
     },
     select: {
-      QtdeAtivo: true,
+      assetQtty: true,
     },
   });
   return exchangeStocks;
@@ -19,7 +19,7 @@ export const checkExchangeStocks = async (order: IOrder) => {
 export const buyStocksService = async (order: IOrder) => {
   const exchangeStocks = await checkExchangeStocks(order);
 
-  if (exchangeStocks && exchangeStocks.QtdeAtivo < order.qtdeAtivo) {
+  if (exchangeStocks && exchangeStocks.assetQtty < order.assetQtty) {
     throw new Exception(
       400,
       'Nao ha estoque disponivel na exchange para realizar essa compra'

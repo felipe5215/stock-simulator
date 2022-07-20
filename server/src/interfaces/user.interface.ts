@@ -1,5 +1,5 @@
 interface IUserBody {
-  codCliente?: number;
+  clientId?: string;
   email: string;
   password: string;
 }

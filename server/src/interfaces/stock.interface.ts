@@ -1,8 +1,8 @@
 interface IStocks {
-  CodAtivo: number;
-  NomeAtivo: string;
+  assetId?: string;
+  assetName: string;
   Valor: number;
-  QtdeAtivo?: number;
+  assetQtty?: number;
 }
 
 export default IStocks;

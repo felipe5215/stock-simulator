@@ -6,21 +6,22 @@ const validateHoldingBody = (
   _res: Response,
   next: NextFunction
 ) => {
-  const { codCliente, codAtivo, qtdeAtivo } = req.body;
+  const {
+    clientId: clientId,
+    assetId: assetId,
+    assetQtty: assetQtty,
+  } = req.body;
 
-  if (!codCliente || !codAtivo || !qtdeAtivo) {
-    throw new Exception(400, 'codCliente, codAtivo and qtdeAtivo are required');
+  if (!clientId || !assetId || !assetQtty) {
+    throw new Exception(400, 'clientId, assetId and assetQtty are required');
   }
-
+  //TODO: refactor this to outside function
   if (
-    typeof codCliente !== 'number' ||
-    typeof codAtivo !== 'number' ||
-    typeof qtdeAtivo !== 'number'
+    typeof clientId !== 'string' ||
+    typeof assetId !== 'string' ||
+    typeof assetQtty !== 'number'
   ) {
-    throw new Exception(
-      400,
-      'codCliente, codAtivo and qtdeAtivo must be numbers'
-    );
+    throw new Exception(400, 'clientId, assetId and assetQtty must be numbers');
   }
 
   next();

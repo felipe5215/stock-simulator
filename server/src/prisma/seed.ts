@@ -18,7 +18,7 @@ async function main() {
   users.forEach(async (user) => {
     await prisma.wallet.create({
       data: {
-        CodCliente: user.CodCliente,
+        clientId: user.clientId,
       },
     });
   });
