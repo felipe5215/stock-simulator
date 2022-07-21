@@ -6,7 +6,7 @@ import walletRoutes from './walletRoutes';
 
 const routes = Router();
 
-routes.use('/user', userRoutes);
+routes.use('/', userRoutes);
 
 routes.use(validateAuthentication);
 

@@ -1,11 +1,16 @@
 import { Router } from 'express';
-import createUserController from '../controllers/userController';
-import { getAllUsersService } from '../services/userService';
+import {
+  createUserController,
+  getAllUsers,
+  userLogin,
+} from '../controllers/userController';
 
 const userRoutes = Router();
 
-userRoutes.get('/', getAllUsersService);
+userRoutes.get('/getUsers', getAllUsers);
 
-userRoutes.post('/create', createUserController);
+userRoutes.post('/createUser', createUserController);
+
+userRoutes.post('/login', userLogin);
 
 export default userRoutes;

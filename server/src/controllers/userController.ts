@@ -1,11 +1,36 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import IUserBody from '../interfaces/user.interface';
-import { createUserService } from '../services/userService';
+import {
+  createUserService,
+  getAllUsersService,
+  userLoginService,
+} from '../services/userService';
+import { createToken } from '../utils/tokenUtils';
 
-const createUserController = async (req: Request, res: Response) => {
+export const createUserController = async (req: Request, res: Response) => {
   const user: IUserBody = req.body;
-  const createUser = await createUserService(user);
+  const createdUser = await createUserService(user);
+  const token = createToken(createdUser);
 
-  res.json(createUser);
+  res.json({ token });
 };
-export default createUserController;
+
+export const getAllUsers = async (_req: Request, res: Response) => {
+  const users = await getAllUsersService();
+  res.json(users);
+};
+
+export const userLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password } = req.body;
+  try {
+    const user = await userLoginService(email, password);
+    const token = createToken(user);
+    res.json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
