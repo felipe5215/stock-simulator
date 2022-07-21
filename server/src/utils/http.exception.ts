@@ -1,9 +1,11 @@
 class Exception extends Error {
   status: number;
+  messages: string;
 
-  constructor(status: number, message: string) {
-    super(message);
+  constructor(status: number, messages: string) {
+    super(messages);
     this.status = status;
+    this.messages = messages;
   }
 }
 
