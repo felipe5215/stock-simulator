@@ -6,6 +6,7 @@ import {
   buyStocksService,
   getAllAssetsService,
   getAssetByIdService,
+  sellStocksService,
 } from '../services/exchangeServices';
 import ZodException from '../utils/zod.exception';
 
@@ -67,6 +68,25 @@ export const buyStocks = async (
   }
 };
 
-export const sellStocks = (_req: Request, res: Response) => {
-  res.send('sell stocks');
+export const sellStocks = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const order: IOrder = req.body;
+
+  try {
+    stocksSchema.parse(order);
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      return next(new ZodException(StatusCodes.CONFLICT, err.issues));
+    }
+  }
+
+  try {
+    const sellStocksOrder = await sellStocksService(order);
+    res.status(StatusCodes.OK).json(sellStocksOrder);
+  } catch (err) {
+    next(err);
+  }
 };
