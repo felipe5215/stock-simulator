@@ -23,18 +23,88 @@ export const getAssetByIdService = async (assetId: string) => {
 };
 
 export const buyStocksService = async (order: IOrder) => {
-  const exchangeStocks = await getAssetByIdService(order.assetId);
-  console.log(
-    `exchange qtty is ${exchangeStocks.assetQtty}, asset price is ${
-      exchangeStocks.value
-    }, your total cost would be ${exchangeStocks.value * order.assetQtty})`
-  );
-  if (exchangeStocks.assetQtty < order.assetQtty) {
+  const exchangeStock = await getAssetByIdService(order.assetId);
+
+  const totalCost = exchangeStock.value * order.assetQtty;
+  if (exchangeStock.assetQtty < order.assetQtty) {
     throw new Exception(
       StatusCodes.CONFLICT,
       'Not enough stocks available on exchange'
     );
   }
 
-  return exchangeStocks;
+  const stockTransaction = async () => {
+    return await prisma.$transaction(async (trx) => {
+      const clientBalance = await trx.wallet.findUnique({
+        where: {
+          clientId: order.clientId,
+        },
+      });
+
+      if (!clientBalance) {
+        throw new Exception(StatusCodes.NOT_FOUND, 'Client not found');
+      }
+
+      if (clientBalance.balance < totalCost) {
+        throw new Exception(StatusCodes.CONFLICT, 'Not enough balance');
+      }
+
+      await trx.wallet.update({
+        where: {
+          clientId: order.clientId,
+        },
+        data: {
+          balance: clientBalance.balance - totalCost,
+        },
+      });
+
+      await trx.stocks.update({
+        where: {
+          assetId: order.assetId,
+        },
+        data: {
+          assetQtty: exchangeStock.assetQtty - order.assetQtty,
+        },
+      });
+
+      const checkIfClientHasAsset = await trx.holdings.findFirst({
+        where: {
+          clientId: order.clientId,
+          assetId: order.assetId,
+        },
+      });
+
+      if (checkIfClientHasAsset) {
+        await trx.holdings.update({
+          where: {
+            clientId_assetId: {
+              clientId: order.clientId,
+              assetId: order.assetId,
+            },
+          },
+          data: {
+            assetQtty: checkIfClientHasAsset.assetQtty + order.assetQtty,
+          },
+        });
+      } else {
+        await trx.holdings.create({
+          data: {
+            clientId: order.clientId,
+            assetId: order.assetId,
+            assetQtty: order.assetQtty,
+          },
+        });
+      }
+    });
+  };
+
+  const executeTransaction = async () => await stockTransaction();
+
+  return executeTransaction()
+    .catch((err) => {
+      throw new Exception(StatusCodes.CONFLICT, err.message);
+    })
+    .finally(() => {
+      prisma.$disconnect();
+    });
 };

@@ -34,12 +34,11 @@ CREATE TABLE `Wallet` (
 
 -- CreateTable
 CREATE TABLE `Holdings` (
-    `holdingId` VARCHAR(191) NOT NULL,
     `assetQtty` INTEGER NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `assetId` VARCHAR(191) NOT NULL,
 
-    PRIMARY KEY (`holdingId`)
+    PRIMARY KEY (`clientId`, `assetId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey

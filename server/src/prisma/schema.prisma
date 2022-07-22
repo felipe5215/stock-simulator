@@ -33,10 +33,11 @@ model Wallet {
 }
 
 model Holdings {
-  holdingId String @id @default(uuid())
   Client    User   @relation(fields: [clientId], references: [clientId])
   Asset     Stocks @relation(fields: [assetId], references: [assetId])
   assetQtty Int
   clientId  String
   assetId   String
+
+  @@id([clientId, assetId])
 }

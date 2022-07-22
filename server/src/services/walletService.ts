@@ -58,8 +58,6 @@ export const depositService = async (depositOrder: IBankOrder) => {
 export const transferService = async (transferOrder: TransferOrder) => {
   const { from, to, amount } = transferOrder;
 
-  console.log(from, to, amount);
-
   const transfer = async () => {
     return await prisma.$transaction(async (trx) => {
       const sender = await trx.wallet.findUnique({ where: { clientId: from } });
