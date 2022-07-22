@@ -2,11 +2,13 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 import IBankOrder from '../interfaces/bankorder.interface';
+import TransferOrder from '../interfaces/transfer.interface';
 import {
   checkBalance,
   depositService,
+  transferService,
   withdrawService,
-} from '../services/bankService';
+} from '../services/walletService';
 import ZodException from '../utils/zod.exception';
 
 // declaring order schema to compare against request body for validation
@@ -64,5 +66,36 @@ export const makeWithdraw = async (
     res.json(withdraw);
   } catch (error) {
     return next(error);
+  }
+};
+
+const transferSchema = z
+  .object({
+    from: z.string(),
+    to: z.string(),
+    amount: z.number().positive(),
+  })
+  .strict();
+
+export const transferFunds = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const transferInfo: TransferOrder = req.body;
+
+  try {
+    transferSchema.parse(transferInfo);
+  } catch (e) {
+    if (e instanceof z.ZodError) {
+      return next(new ZodException(StatusCodes.CONFLICT, e.issues));
+    }
+  }
+
+  try {
+    const transfer = await transferService(transferInfo);
+    res.json(transfer);
+  } catch (error) {
+    next(error);
   }
 };
