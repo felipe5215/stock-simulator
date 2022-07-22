@@ -13,7 +13,7 @@ import ZodException from '../utils/zod.exception';
 const orderSchema = z
   .object({
     clientId: z.string(),
-    amount: z.number(),
+    amount: z.number().positive(),
   })
   .strict();
 
