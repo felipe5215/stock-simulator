@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { StatusCodes } from 'http-status-codes';
 import IBankOrder from '../interfaces/bankorder.interface';
 import Exception from '../utils/http.exception';
 
@@ -9,7 +10,7 @@ export const checkBalance = async (clientId: string) => {
     .findUnique({ where: { clientId } })
     .then((client) => {
       if (!client) {
-        throw new Exception(404, 'Client not found');
+        throw new Exception(StatusCodes.NOT_FOUND, 'Client not found');
       }
       return client;
     });
@@ -21,7 +22,7 @@ export const withdrawService = async (withdrawOrder: IBankOrder) => {
   const { clientId, amount } = withdrawOrder;
   const currBalance = await checkBalance(clientId).then((client) => {
     if (client.balance - amount < 0) {
-      throw new Exception(400, 'Not enough balance');
+      throw new Exception(StatusCodes.CONFLICT, 'Not enough balance');
     }
     return client.balance;
   });

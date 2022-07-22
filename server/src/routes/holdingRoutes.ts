@@ -1,11 +1,9 @@
 import { Router } from 'express';
-import { buyStocks } from '../controllers/holdingControllers';
-import validateHoldingBody from '../middlewares/validateHoldingBody';
+import { buyStocks, sellStocks } from '../controllers/holdingControllers';
 
 const holdingRoutes = Router();
 
-holdingRoutes.use(validateHoldingBody);
-
 holdingRoutes.post('/buy', buyStocks);
+holdingRoutes.post('/sell', sellStocks);
 
 export default holdingRoutes;

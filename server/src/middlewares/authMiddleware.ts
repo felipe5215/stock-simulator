@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import Exception from '../utils/http.exception';
 import { verifyToken } from '../utils/tokenUtils';
 
@@ -10,7 +11,7 @@ const validateAuthentication = (
   const { authorization } = req.headers;
 
   if (!authorization) {
-    throw new Exception(401, 'Unauthorized');
+    throw new Exception(StatusCodes.FORBIDDEN, 'Token not provided');
   }
 
   verifyToken(authorization);

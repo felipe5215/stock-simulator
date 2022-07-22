@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { z } from 'zod';
-import Exception from '../utils/http.exception';
 import ZodException from '../utils/zod.exception';
 
 const zodTest = (req: Request, res: Response, next: NextFunction) => {
