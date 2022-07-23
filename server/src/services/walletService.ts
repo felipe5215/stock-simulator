@@ -56,11 +56,13 @@ export const depositService = async (depositOrder: IBankOrder) => {
 };
 
 export const transferService = async (transferOrder: TransferOrder) => {
-  const { from, to, amount } = transferOrder;
+  const { clientId, to, amount } = transferOrder;
 
   const transfer = async () => {
     return await prisma.$transaction(async (trx) => {
-      const sender = await trx.wallet.findUnique({ where: { clientId: from } });
+      const sender = await trx.wallet.findUnique({
+        where: { clientId: clientId },
+      });
       const receiver = await trx.wallet.findUnique({ where: { clientId: to } });
 
       if (!sender) {
@@ -76,7 +78,7 @@ export const transferService = async (transferOrder: TransferOrder) => {
 
       await trx.wallet.update({
         where: {
-          clientId: from,
+          clientId: clientId,
         },
         data: {
           balance: sender.balance - amount,

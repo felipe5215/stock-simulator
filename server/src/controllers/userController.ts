@@ -37,7 +37,7 @@ export const createUserController = async (
   }
 
   const createdUser = await createUserService(user);
-  const token = createToken(createdUser);
+  const token = createToken(createdUser.clientId);
 
   res.json({ token });
 };
@@ -64,7 +64,7 @@ export const userLogin = async (
 
   try {
     const loggedUser = await userLoginService(user.email, user.password);
-    const token = createToken(loggedUser);
+    const token = createToken(loggedUser.clientId);
     res.json({ token });
   } catch (error) {
     next(error);

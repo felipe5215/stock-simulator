@@ -71,7 +71,7 @@ export const makeWithdraw = async (
 
 const transferSchema = z
   .object({
-    from: z.string(),
+    clientId: z.string(),
     to: z.string(),
     amount: z.number().positive(),
   })
@@ -93,8 +93,12 @@ export const transferFunds = async (
   }
 
   try {
-    const transfer = await transferService(transferInfo);
-    res.json(transfer);
+    await transferService(transferInfo);
+    const newBalance = await checkBalance(transferInfo.clientId);
+    res.json({
+      message: `You transferred R$ ${transferInfo.amount} to ${transferInfo.to}`,
+      balance: `Your new balance is R$ ${newBalance.balance}`,
+    });
   } catch (error) {
     next(error);
   }

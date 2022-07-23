@@ -1,5 +1,5 @@
 interface TransferOrder {
-  from: string;
+  clientId: string;
   to: string;
   amount: number;
 }
