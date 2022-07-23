@@ -2,11 +2,11 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 import IUserBody from '../interfaces/user.interface';
+import { createUserService } from '../services/user/createUserService';
 import {
-  createUserService,
   getAllUsersService,
   userLoginService,
-} from '../services/userService';
+} from '../services/userServiceOld';
 import { createToken } from '../utils/tokenUtils';
 import ZodException from '../utils/zod.exception';
 

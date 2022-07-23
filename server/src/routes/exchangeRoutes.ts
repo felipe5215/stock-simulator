@@ -5,14 +5,15 @@ import {
   getAssetById,
   sellStocks,
 } from '../controllers/exchangeControllers';
-import validateAuthentication from '../middlewares/authMiddleware';
+import validateBody from '../middlewares/validateBody';
+import validateParams from '../middlewares/validateParams';
 
 const exchangeRoutes = Router();
 
 exchangeRoutes.get('/assets', getAllAssets);
 exchangeRoutes.get('/assets/:assetId', getAssetById);
 
-exchangeRoutes.use(validateAuthentication);
+exchangeRoutes.use(validateBody);
 
 exchangeRoutes.post('/buy', buyStocks);
 exchangeRoutes.post('/sell', sellStocks);

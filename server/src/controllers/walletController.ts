@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 import IBankOrder from '../interfaces/bankorder.interface';
 import TransferOrder from '../interfaces/transfer.interface';
+import { getAssestsByClientService } from '../services/user/getAssetsByClientId';
 import {
   checkBalance,
   depositService,
@@ -19,10 +20,32 @@ const orderSchema = z
   })
   .strict();
 
-export const getBalanceById = async (req: Request, res: Response) => {
+export const getBalanceById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { id } = req.params;
-  const userWallet = await checkBalance(id);
-  res.status(StatusCodes.OK).json(userWallet);
+  try {
+    const userWallet = await checkBalance(id);
+    res.status(StatusCodes.OK).json(userWallet);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAssetsByClientId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  try {
+    const assets = await getAssestsByClientService(id);
+    res.status(StatusCodes.OK).json(assets);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const makeDeposit = async (

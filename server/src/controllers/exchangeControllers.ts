@@ -2,12 +2,11 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 import IOrder from '../interfaces/order.interface';
-import {
-  buyStocksService,
-  getAllAssetsService,
-  getAssetByIdService,
-  sellStocksService,
-} from '../services/exchangeServices';
+import { buyStocksService } from '../services/exchange/buyStockService';
+import { getAllAssetsService } from '../services/exchange/getAllAssetsService';
+import { getAssetByIdService } from '../services/exchange/getAssetByIdService';
+import { sellStocksService } from '../services/exchange/sellStockService';
+
 import ZodException from '../utils/zod.exception';
 
 const stocksSchema = z
