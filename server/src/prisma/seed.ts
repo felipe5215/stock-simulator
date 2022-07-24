@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import Stocks from '../data/Stocks';
 import Users from '../data/Users';
-import { createUserService } from '../services/userServiceOld';
+import { createUserService } from '../services/user/createUserService';
 
 const prisma = new PrismaClient();
 

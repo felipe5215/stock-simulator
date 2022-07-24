@@ -1,11 +1,9 @@
 import { Router } from 'express';
-import {
-  getAssetsByClientId,
-  getBalanceById,
-  makeDeposit,
-  makeWithdraw,
-  transferFunds,
-} from '../controllers/walletController';
+import { getAssetsByClientId } from '../controllers/wallet/getAssetsByClient';
+import { getBalanceById } from '../controllers/wallet/getBalanceById';
+import { makeDeposit } from '../controllers/wallet/makeDeposit';
+import { makeWithdraw } from '../controllers/wallet/makeWithdraw';
+import { transferFunds } from '../controllers/wallet/transferFunds';
 import validateParams from '../middlewares/validateParams';
 
 const walletRoutes = Router();
