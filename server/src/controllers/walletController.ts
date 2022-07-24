@@ -4,12 +4,10 @@ import { z } from 'zod';
 import IBankOrder from '../interfaces/bankorder.interface';
 import TransferOrder from '../interfaces/transfer.interface';
 import { getAssestsByClientService } from '../services/user/getAssetsByClientId';
-import {
-  checkBalance,
-  depositService,
-  transferService,
-  withdrawService,
-} from '../services/walletService';
+import { checkBalance } from '../services/wallet/checkBalance';
+import { depositService } from '../services/wallet/depositService';
+import { transferService } from '../services/wallet/transferService';
+import { withdrawService } from '../services/wallet/withdrawService';
 import ZodException from '../utils/zod.exception';
 
 // declaring order schema to compare against request body for validation

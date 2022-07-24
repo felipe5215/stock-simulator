@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import IOrder from '../../interfaces/order.interface';
 import Exception from '../../utils/http.exception';
-import { checkBalance } from '../walletService';
+import { checkBalance } from '../wallet/checkBalance';
 import { getAssetByIdService } from './getAssetByIdService';
 
 const prisma = new PrismaClient();
