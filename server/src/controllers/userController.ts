@@ -2,11 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 import IUserBody from '../interfaces/user.interface';
-import {
-  createUserService,
-  getAllUsersService,
-  userLoginService,
-} from '../services/userService';
+import { createUserService } from '../services/user/createUserService';
+import { userLoginService } from '../services/user/userLoginService';
+
 import { createToken } from '../utils/tokenUtils';
 import ZodException from '../utils/zod.exception';
 
@@ -37,14 +35,9 @@ export const createUserController = async (
   }
 
   const createdUser = await createUserService(user);
-  const token = createToken(createdUser);
+  const token = createToken(createdUser.clientId);
 
   res.json({ token });
-};
-
-export const getAllUsers = async (_req: Request, res: Response) => {
-  const users = await getAllUsersService();
-  res.json(users);
 };
 
 export const userLogin = async (
@@ -64,8 +57,8 @@ export const userLogin = async (
 
   try {
     const loggedUser = await userLoginService(user.email, user.password);
-    const token = createToken(loggedUser);
-    res.json({ token });
+    const token = createToken(loggedUser.clientId);
+    res.json({ clientId: loggedUser.clientId, token: token });
   } catch (error) {
     next(error);
   }
