@@ -1,12 +1,9 @@
 import { Router } from 'express';
-import {
-  buyStocks,
-  getAllAssets,
-  getAssetById,
-  sellStocks,
-} from '../controllers/exchangeControllers';
+import { buyStocks } from '../controllers/exchange/buyStocks';
+import { getAllAssets } from '../controllers/exchange/getAllAssets';
+import { getAssetById } from '../controllers/exchange/getAssetsById';
+import { sellStocks } from '../controllers/exchange/sellStocks';
 import validateBody from '../middlewares/validateBody';
-import validateParams from '../middlewares/validateParams';
 
 const exchangeRoutes = Router();
 
