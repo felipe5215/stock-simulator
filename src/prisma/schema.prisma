@@ -1,0 +1,43 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  clientId String     @id @unique @default(uuid())
+  email    String     @unique
+  password String
+  Holdings Holdings[]
+  Wallet   Wallet[]
+}
+
+model Stocks {
+
+  assetId   String     @id @unique @default(uuid())
+  assetName String     @unique
+  value     Float      @db.Double()
+  assetQtty Int        @default(999)
+  Holdings  Holdings[]
+}
+
+model Wallet {
+  walletId String @id @unique @default(uuid())
+  Client   User   @relation(fields: [clientId], references: [clientId])
+  clientId String @unique
+  balance  Float  @db.Double()
+}
+
+model Holdings {
+  Client    User   @relation(fields: [clientId], references: [clientId])
+  Asset     Stocks @relation(fields: [assetId], references: [assetId])
+  assetQtty Int
+  clientId  String
+  assetId   String
+
+  @@id([clientId, assetId])
+}
