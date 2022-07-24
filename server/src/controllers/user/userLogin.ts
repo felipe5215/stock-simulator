@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
-import { z } from 'zod';
-import IUserBody from '../../interfaces/user.interface';
 import { userLoginService } from '../../services/user/userLoginService';
+import IUserBody from '../../interfaces/user.interface';
 import { createToken } from '../../utils/tokenUtils';
+import { z } from 'zod';
 import ZodException from '../../utils/zod.exception';
+import { StatusCodes } from 'http-status-codes/build/cjs/status-codes';
+import { Request, Response, NextFunction } from 'express';
 
 // declaring zod schema for request body validation
 const userSchema = z

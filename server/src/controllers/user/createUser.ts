@@ -1,10 +1,10 @@
-import { createToken } from '../../utils/tokenUtils';
+import { z } from 'zod';
 import ZodException from '../../utils/zod.exception';
-import { z } from 'zod/lib';
-import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import IUserBody from '../../interfaces/user.interface';
+import { Request, Response, NextFunction } from 'express';
+import { createToken } from '../../utils/tokenUtils';
 import { createUserService } from '../../services/user/createUserService';
+import IUserBody from '../../interfaces/user.interface';
 
 const userSchema = z
   .object({
