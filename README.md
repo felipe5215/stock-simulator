@@ -1,4 +1,5 @@
 # Stock Simulator
+> https://stonks-simulator52.herokuapp.com/
 
 ## Rodando o projeto localmente:
 
