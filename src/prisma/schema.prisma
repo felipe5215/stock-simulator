@@ -20,7 +20,7 @@ model Stocks {
 
   assetId   String     @id @unique @default(uuid())
   assetName String     @unique
-  value     Float      @db.Double()
+  value     Float
   assetQtty Int        @default(999)
   Holdings  Holdings[]
 }
@@ -29,7 +29,7 @@ model Wallet {
   walletId String @id @unique @default(uuid())
   Client   User   @relation(fields: [clientId], references: [clientId])
   clientId String @unique
-  balance  Float  @db.Double()
+  balance  Float
 }
 
 model Holdings {

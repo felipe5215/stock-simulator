@@ -1,0 +1,1 @@
+{"version":3,"file":"stocks.schema.js","sourceRoot":"","sources":["../../../src/interfaces/stocks.schema.ts"],"names":[],"mappings":";;AAAA,2BAAwB;AAExB,IAAM,YAAY,GAAG,OAAC;KACnB,MAAM,CAAC;IACN,QAAQ,EAAE,OAAC,CAAC,MAAM,EAAE;IACpB,OAAO,EAAE,OAAC,CAAC,MAAM,EAAE;IACnB,SAAS,EAAE,OAAC,CAAC,MAAM,EAAE,CAAC,QAAQ,EAAE,CAAC,GAAG,EAAE;CACvC,CAAC;KACD,MAAM,EAAE,CAAC;AAEZ,qBAAe,YAAY,CAAC"}
