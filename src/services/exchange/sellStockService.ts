@@ -24,6 +24,10 @@ export const sellStocksService = async (order: IOrder) => {
     throw new Exception(StatusCodes.NOT_FOUND, 'Investment not found');
   }
 
+  if (checkAssets?.assetQtty < order.assetQtty) {
+    throw new Exception(StatusCodes.BAD_REQUEST, 'Not enough assets to sell');
+  }
+
   await prisma
     .$transaction([
       prisma.stocks.update({
