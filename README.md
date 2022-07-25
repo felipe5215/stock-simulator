@@ -83,8 +83,9 @@ O retorno desta requisição será exatamente o mesmo do endpoint /createuser. U
 Rotas destinadas as seguintes funcionalidades: consultar saldo, saques, depósitos e transferências.
 
 ## SALDO 
-> rota protegida
+
 > `GET` /wallet/{clientId}
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000//wallet/{clientId}`
 
@@ -101,8 +102,8 @@ Como resposta, o endpoint entrega:
 ```
 
 ## SAQUE
-> rota protegida
->`POST` /wallet/withdraw
+> `POST` /wallet/withdraw
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000//wallet/withdraw/`
 
@@ -128,8 +129,9 @@ A resposta será, em caso de sucesso:
 > - amount: um número inteiro não negativo
 
 ## DEPÓSITO
-> rota protegida
+
 > `POST` /wallet/deposit
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000//wallet/deposit/`
 
@@ -155,8 +157,9 @@ A resposta será, em caso de sucesso:
 > - "amount": um número inteiro não negativo
 
 ## TRANSFERÊNCIA
-> rota protegida
+
 > `POST` /wallet/transfer
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000//wallet/transfer/{clientId}`
 
@@ -185,8 +188,9 @@ A resposta será, em caso de sucesso:
 > - amount: um número inteiro não negativo
 
 ## ATIVOS POR CLIENTE
-> rota protegida
+
 > `GET` /wallet/assets/{clientId}
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000//wallet/assets/{clientId}`
 
@@ -225,7 +229,7 @@ Em caso de sucesso, seu retorno será:
 Aqui serão realizadas funcionalidades básicas como: pesquisa de ativos, compra e venda de ações.
 
 ## CONSULTA DE ATIVOS
-> rota protegida
+
 > `GET` /exchange/assets/
 
 Esse endpoint se encontra em: `localhost:3000/exchange/assets`
@@ -257,8 +261,8 @@ para compra.
 ```
 
 ## COMPRA DE ATIVOS 
-> `POST` /exchange/buy/
-> rota protegida
+>  `POST` /exchange/buy/
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000/exchange/buy`
 
@@ -277,7 +281,7 @@ Espera receber como corpo:
 
 ## VENDA DE ATIVOS 
 > `POST` /exchange/sell/
-> rota protegida
+- rota protegida
 
 Esse endpoint se encontra em: `localhost:3000/exchange/sell`
 
