@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "ts-node": "ts-node --compiler-options \"{\"module\": \"commonjs\"}\""
+    "ts-node": "ts-node --compiler-options \"{\"module\": \"commonjs\"}\"",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.5.8",
