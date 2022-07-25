@@ -28,11 +28,14 @@ Inicie a aplicação com o comando:
 
 As rotas serão descritas e agrupadas por funcionalidades. Atente-se às rotas que pedem autenticação.
 
-## USER
+### USER
 
 Rotas destinadas ao usuário não necessitam autenticação.
 
-### `POST` /createuser
+## CREATE USER
+> `POST` /createuser
+
+Esse endpoint se encontra em: `localhost:3000//login/`
 
 Essa rota espera receber no corpo da requisição:
 
@@ -56,7 +59,10 @@ Esse endpoint em caso de sucesso nos enviará:
 
 O `token` será necessário para acessar outras funcionalidades da aplicação, juntamente com o `clientId`
 
-## `POST` /login
+## LOGIN
+>`POST` /login
+
+Esse endpoint se encontra em: `localhost:3000//login/`
 
 Essa rota espera receber no corpo da requisição:
 
@@ -71,11 +77,14 @@ Essa rota espera receber no corpo da requisição:
 
 O retorno desta requisição será exatamente o mesmo do endpoint /createuser. Use-o para resgatar ou revalidar token.
 
-## WALLET
+### WALLET
 
 Rotas destinadas as seguintes funcionalidades: consultar saldo, saques, depósitos e transferências.
 
-## `GET`/wallet/{clientId}
+## SALDO
+> `GET` /wallet/{clientId}
+
+Esse endpoint se encontra em: `localhost:3000//wallet/{clientId}`
 
 Requisição espera receber como parametro o clientId retornado no login ou criação do usuário.
 
@@ -88,7 +97,11 @@ Como resposta, o endpoint entrega:
 	"balance": 999.99
 }
 ```
-## `POST`/wallet/withdraw
+
+## SAQUE
+>`POST` /wallet/withdraw
+
+Esse endpoint se encontra em: `localhost:3000//wallet/withdraw/`
 
 Como corpo da requisição, é esperado:
 ```
@@ -111,7 +124,10 @@ A resposta será, em caso de sucesso:
 > - clientId precisa ser um string
 > - amount: um número inteiro não negativo
 
-## `POST`/wallet/deposit
+## DEPÓSITO
+> `POST` /wallet/deposit
+
+Esse endpoint se encontra em: `localhost:3000//wallet/deposit/`
 
 Como corpo da requisição, é esperado:
 ```
@@ -134,7 +150,10 @@ A resposta será, em caso de sucesso:
 > - "clientId" precisa ser um string
 > - "amount": um número inteiro não negativo
 
-## `POST`/wallet/transfer
+## TRANSFERÊNCIA
+> `POST` /wallet/transfer
+
+Esse endpoint se encontra em: `localhost:3000//wallet/transfer/{clientId}`
 
 Funcionalidade para transferir fundos a outra conta.
 
@@ -160,7 +179,10 @@ A resposta será, em caso de sucesso:
 > - "to" precisa ser o clientId da conta a receber o dinheiro
 > - amount: um número inteiro não negativo
 
-## `GET`/wallet/assets/{clientId}
+## ATIVOS POR CLIENTE
+> `GET` /wallet/assets/{clientId}
+
+Esse endpoint se encontra em: `localhost:3000//wallet/assets/{clientId}`
 
 Esse endpoint retorna a quantidade de ações que o client possue na carteira.
 
@@ -191,6 +213,80 @@ Em caso de sucesso, seu retorno será:
 	}
 ]
 ```
+
+### EXCHANGE
+
+Aqui serão realizadas funcionalidades básicas como: pesquisa de ativos, compra e venda de ações.
+
+## CONSULTA DE ATIVOS 
+> `GET` /exchange/assets/
+
+Esse endpoint se encontra em: `localhost:3000/exchange/assets`
+
+Tem como retorno a lista de ações disponíveis na exchange, seu nome, valor unitário e quantidade de ativos disponíveis
+para compra.
+
+```
+[
+	{
+		"assetId": "178ca6d7-88f7-4a29-896e-efbd709183d2",
+		"assetName": "KLBN11",
+		"value": 51.312,
+		"assetQtty": 986
+	},
+	{
+		"assetId": "1c98e13b-1927-4ca2-a692-124e82ec33d5",
+		"assetName": "PETR4",
+		"value": 3.34,
+		"assetQtty": 910
+	},
+	{
+		"assetId": "3d792aff-d1a2-4b36-9c66-8c0759cc6df2",
+		"assetName": "XPTO",
+		"value": 391.22,
+		"assetQtty": 999
+	}
+]
+```
+
+## COMPRA DE ATIVOS 
+> `POST` /exchange/buy/
+
+Esse endpoint se encontra em: `localhost:3000/exchange/buy`
+
+Espera receber como corpo: 
+```
+{
+	"clientId": "4df3537c-c870-4610-a01a-bee4409f2e83",
+	"assetId": "1c98e13b-1927-4ca2-a692-124e82ec33d5",
+	"assetQtty": 89
+}
+```
+
+> - "clientId" deve ser um usuário válido
+> - "assetId" deve ser um ativo válido.
+> - "assetQtty" deve ser um número maior que zero, menor que a quantidade máxima na exchange e o usuário deve ter fundos disponíveis para a compra ser concluída.
+
+## VENDA DE ATIVOS 
+> `POST` /exchange/sell/
+
+Esse endpoint se encontra em: `localhost:3000/exchange/sell`
+
+Espera receber como corpo: 
+```
+{
+	"clientId": "4df3537c-c870-4610-a01a-bee4409f2e83",
+	"assetId": "1c98e13b-1927-4ca2-a692-124e82ec33d5",
+	"assetQtty": 89
+}
+```
+
+> - "clientId" deve ser um usuário válido
+> - "assetId" deve ser um ativo válido.
+> - "assetQtty" deve ser um número maior que zero, menor que a quantidade que o usuario atualmente tem.
+
+
+
 
 
 
