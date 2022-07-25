@@ -76,12 +76,14 @@ Essa rota espera receber no corpo da requisição:
 > os dados do usuário precisão ser válidos.
 
 O retorno desta requisição será exatamente o mesmo do endpoint /createuser. Use-o para resgatar ou revalidar token.
+### Rotas protegidas devem receber, nos headers, o token provido na key `authorization`
 
 ### WALLET
 
 Rotas destinadas as seguintes funcionalidades: consultar saldo, saques, depósitos e transferências.
 
-## SALDO
+## SALDO 
+> rota protegida
 > `GET` /wallet/{clientId}
 
 Esse endpoint se encontra em: `localhost:3000//wallet/{clientId}`
@@ -99,6 +101,7 @@ Como resposta, o endpoint entrega:
 ```
 
 ## SAQUE
+> rota protegida
 >`POST` /wallet/withdraw
 
 Esse endpoint se encontra em: `localhost:3000//wallet/withdraw/`
@@ -125,6 +128,7 @@ A resposta será, em caso de sucesso:
 > - amount: um número inteiro não negativo
 
 ## DEPÓSITO
+> rota protegida
 > `POST` /wallet/deposit
 
 Esse endpoint se encontra em: `localhost:3000//wallet/deposit/`
@@ -151,6 +155,7 @@ A resposta será, em caso de sucesso:
 > - "amount": um número inteiro não negativo
 
 ## TRANSFERÊNCIA
+> rota protegida
 > `POST` /wallet/transfer
 
 Esse endpoint se encontra em: `localhost:3000//wallet/transfer/{clientId}`
@@ -175,11 +180,12 @@ A resposta será, em caso de sucesso:
 }
 ```
 
-> - "clientId" precisa ser um string
+> - "clientId" precisa ser um string, precisa ser o usuario autorizado no token
 > - "to" precisa ser o clientId da conta a receber o dinheiro
 > - amount: um número inteiro não negativo
 
 ## ATIVOS POR CLIENTE
+> rota protegida
 > `GET` /wallet/assets/{clientId}
 
 Esse endpoint se encontra em: `localhost:3000//wallet/assets/{clientId}`
@@ -218,7 +224,8 @@ Em caso de sucesso, seu retorno será:
 
 Aqui serão realizadas funcionalidades básicas como: pesquisa de ativos, compra e venda de ações.
 
-## CONSULTA DE ATIVOS 
+## CONSULTA DE ATIVOS
+> rota protegida
 > `GET` /exchange/assets/
 
 Esse endpoint se encontra em: `localhost:3000/exchange/assets`
@@ -251,6 +258,7 @@ para compra.
 
 ## COMPRA DE ATIVOS 
 > `POST` /exchange/buy/
+> rota protegida
 
 Esse endpoint se encontra em: `localhost:3000/exchange/buy`
 
@@ -269,6 +277,7 @@ Espera receber como corpo:
 
 ## VENDA DE ATIVOS 
 > `POST` /exchange/sell/
+> rota protegida
 
 Esse endpoint se encontra em: `localhost:3000/exchange/sell`
 
