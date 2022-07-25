@@ -1,0 +1,1 @@
+{"version":3,"file":"order.schema.js","sourceRoot":"","sources":["../../../src/interfaces/order.schema.ts"],"names":[],"mappings":";;AAAA,2BAAwB;AAExB,IAAM,WAAW,GAAG,OAAC;KAClB,MAAM,CAAC;IACN,QAAQ,EAAE,OAAC,CAAC,MAAM,EAAE;IACpB,MAAM,EAAE,OAAC,CAAC,MAAM,EAAE,CAAC,QAAQ,EAAE;CAC9B,CAAC;KACD,MAAM,EAAE,CAAC;AAEZ,qBAAe,WAAW,CAAC"}
